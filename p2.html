@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <!-- Meta tag crucial para que la página sea responsiva en dispositivos móviles -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Primera Página | Nivel Intermedio</title>
+    
+    <style>
+        :root {
+            --color-primario: seagreen;
+            --color-secundario: #9600ff;
+            --color-fondo: #f4f5f7;
+            --color-texto: #333;
+            --color-tarjeta: #ffffff;
+            --color-borde: #e5e7eb;
+            --color-nav: #2c3e50;
+            --sombra: 0 10px 25px rgba(0, 0, 0, 0.08);
+            --radio: 14px;
+            --transicion: 0.3s ease;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            background:
+                linear-gradient(180deg, #f8fafc 0%, var(--color-fondo) 100%);
+            color: var(--color-texto);
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        img, video {
+            max-width: 100%;
+            display: block;
+        }
+
+        /* Header */
+        .main-header {
+            background: linear-gradient(135deg, var(--color-primario), #2e8b57);
+            color: white;
+            text-align: center;
+            padding: 2.5rem 1rem;
+            box-shadow: var(--sombra);
+        }
+
+        .main-header h1 {
+            font-size: clamp(1.8rem, 4vw, 3rem);
+            letter-spacing: 0.5px;
+        }
+
+        /* Nav */
+        .main-nav {
+            background-color: var(--color-nav);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+        }
+
+        .main-nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            padding: 0.9rem 1rem;
+            flex-wrap: wrap;
+        }
+
+        .main-nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            padding: 0.65rem 1rem;
+            border-radius: 999px;
+            transition: background-color var(--transicion), transform var(--transicion), color var(--transicion);
+            outline: none;
+        }
+
+        .main-nav a:hover,
+        .main-nav a:focus-visible {
+            background-color: var(--color-primario);
+            transform: translateY(-1px);
+        }
+
+        /* Main layout */
+        .container {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+            width: min(1200px, calc(100% - 2rem));
+            margin: 2rem auto;
+            flex: 1;
+        }
+
+        @media (min-width: 768px) {
+            .container {
+                grid-template-columns: 2.5fr 1fr;
+                gap: 2rem;
+            }
+        }
+
+        .content, .sidebar {
+            background-color: var(--color-tarjeta);
+            padding: 2rem;
+            border-radius: var(--radio);
+            box-shadow: var(--sombra);
+            border: 1px solid rgba(0, 0, 0, 0.03);
+        }
+
+        .content h2,
+        .sidebar h3,
+        .contact-section h3 {
+            color: #1f2937;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        .content p,
+        .sidebar p {
+            margin-bottom: 1rem;
+        }
+
+        .content article {
+            padding-bottom: 1rem;
+        }
+
+        /* Video */
+        .responsive-video {
+            width: 100%;
+            border-radius: 12px;
+            margin: 1.5rem 0 0;
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+            background: #000;
+        }
+
+        /* Form */
+        .contact-section {
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--color-borde);
+        }
+
+        .form-group {
+            margin-bottom: 1.2rem;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group label {
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+            color: #374151;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            padding: 0.9rem 1rem;
+            border: 1px solid #cbd5e1;
+            border-radius: 10px;
+            font-family: inherit;
+            font-size: 1rem;
+            background-color: #fff;
+            transition: border-color var(--transicion), box-shadow var(--transicion), transform var(--transicion);
+        }
+
+        .form-group input::placeholder,
+        .form-group textarea::placeholder {
+            color: #94a3b8;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--color-primario);
+            box-shadow: 0 0 0 4px rgba(46, 139, 87, 0.15);
+        }
+
+        .btn-submit {
+            background: linear-gradient(135deg, var(--color-primario), #238b57);
+            color: white;
+            border: none;
+            padding: 0.9rem 1.6rem;
+            font-size: 1rem;
+            font-weight: 600;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: transform var(--transicion), box-shadow var(--transicion), filter var(--transicion);
+            box-shadow: 0 8px 18px rgba(35, 139, 87, 0.25);
+        }
+
+        .btn-submit:hover {
+            transform: translateY(-2px);
+            filter: brightness(1.02);
+        }
+
+        .btn-submit:active {
+            transform: translateY(0);
+        }
+
+        .btn-submit:focus-visible {
+            outline: none;
+            box-shadow: 0 0 0 4px rgba(46, 139, 87, 0.2);
+        }
+
+        /* Sidebar */
+        .sidebar {
+            border-top: 4px solid var(--color-secundario);
+            height: fit-content;
+        }
+
+        .sidebar p {
+            color: #4b5563;
+        }
+
+        /* Footer */
+        .main-footer {
+            background-color: var(--color-nav);
+            color: white;
+            text-align: center;
+            padding: 1.5rem;
+            margin-top: auto;
+        }
+
+        .brand-text {
+            color: #d1a3ff;
+            font-weight: 700;
+        }
+
+        /* Responsive refinements */
+        @media (max-width: 480px) {
+            .content, .sidebar {
+                padding: 1.25rem;
+            }
+
+            .main-header {
+                padding: 2rem 1rem;
+            }
+
+            .main-nav ul {
+                gap: 0.5rem;
+            }
+
+            .main-nav a {
+                padding: 0.55rem 0.85rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="main-header">
+        <h1>Bienvenido a mi página</h1>
+    </header>
+
+    <nav class="main-nav" aria-label="Navegación principal">
+        <ul>
+            <li><a href="#">Inicio</a></li>
+            <li><a href="#">Acerca de</a></li>
+            <li><a href="#">Contacto</a></li>
+        </ul>
+    </nav>
+
+    <!-- Envoltura principal semántica -->
+    <main class="container">
+        
+        <!-- Sección de contenido principal -->
+        <section class="content">
+            <article>
+                <h2>Artículo Principal</h2>
+                <p>Este es un artículo con texto. Aquí va algún contenido interesante sobre el tema.</p>
+                <p>Más texto para llenar el artículo.</p>
+                
+                <video controls class="responsive-video">
+                    <source src="video.mp4" type="video/mp4">
+                    Tu navegador no soporta el elemento video.
+                </video>
+            </article>
+
+            <!-- Formulario mejor estructurado -->
+            <section class="contact-section">
+                <h3>Envíanos un mensaje</h3>
+                <form action="#" method="post">
+                    <div class="form-group">
+                        <label for="email">Correo Electrónico:</label>
+                        <input type="email" id="email" name="email" placeholder="tu@correo.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="mensaje">Mensaje:</label>
+                        <textarea id="mensaje" name="mensaje" rows="4" placeholder="Escribe tu mensaje aquí..." required></textarea>
+                    </div>
+                    <button type="submit" class="btn-submit">Enviar</button>
+                </form>
+            </section>
+        </section>
+
+        <!-- Barra lateral -->
+        <aside class="sidebar">
+            <h3>Información Adicional</h3>
+            <p>Aquí hay información extra, como enlaces o datos que complementan la lectura principal.</p>
+        </aside>
+
+    </main>
+
+    <footer class="main-footer">
+        <p>&copy; <span class="brand-text">2027 Mi Página.</span> Todos los derechos reservados.</p>
+    </footer>
+
+</body>
+</html>
